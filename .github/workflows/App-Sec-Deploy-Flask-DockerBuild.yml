@@ -131,8 +131,13 @@ jobs:
           wget https://github.com/Azure/kubelogin/releases/download/${{ env.kubeloginversion }}/kubelogin-linux-amd64.zip
           unzip kubelogin-linux-amd64.zip
           sudo mv bin/linux_amd64/kubelogin /usr/bin
-          kubelogin convert-kubeconfig -l azurecli
 
+      - name: Kubelogin-Janita
+        env:
+          kubeloginversion: 'v0.0.11'
+        run: |
+          kubelogin convert-kubeconfig -l azurecli
+          
       - name: Create the namespace if it does not exist
         if: ${{ inputs.NAMESPACE }} != 'default'
         run: |
